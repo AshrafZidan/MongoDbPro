@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import dialogs.dialog;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -31,10 +32,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import loadFxml.MainUpdateSupplier;
 
 /**
  * FXML Controller class
@@ -65,6 +68,74 @@ public class SupplierController implements Initializable {
     private TreeTableColumn<SupplierController.supplierTable, String> supplierTable_address;
 
     ObservableList<SupplierController.supplierTable> supplierTable_data = FXCollections.observableArrayList();
+
+    @FXML
+    private JFXButton refreshTable;
+
+    @FXML
+    private JFXButton deleteSupplier;
+
+
+    @FXML
+    void deleteSupplierAction(ActionEvent event) {
+
+
+        // check Selection
+        RecursiveTreeItem selectedItem = (RecursiveTreeItem) supplierTable.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+
+            supplierTable supplierTableSelected = (SupplierController.supplierTable) selectedItem.getValue();
+
+            BasicDBObject basicDBObject = supplierTransaction.deleteSupplier(supplierTableSelected.id.get());
+
+            if (basicDBObject != null) {
+
+                // delete from table
+                boolean t = supplierTable_data.remove(supplierTableSelected);
+                final TreeItem<supplierTable> root = new RecursiveTreeItem<supplierTable>(supplierTable_data, RecursiveTreeObject::getChildren);
+                supplierTable.setRoot(root);
+                if (!t) {
+                    dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "خطأ فى مسح المورد من الجدول");
+
+                }
+
+
+            } else {
+                dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "خطأ فى مسح المورد من الداتابيز ");
+
+            }
+
+
+        } else {
+            dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "اختر المورد للمسح");
+
+
+        }
+    }
+
+    @FXML
+    void refreshTableAction(ActionEvent event) {
+
+
+        //clear table data
+        supplierTable_data.clear();
+
+        // Select All Suppliers
+
+        List<DBObject> dbObjects = supplierTransaction.SelectAllSuppliers();
+        dbObjects.stream().forEach(ee -> {
+
+            supplierTable_data.add(new supplierTable(ee.get("_id").toString(), ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString()));
+
+
+        });
+
+        final TreeItem<supplierTable> root = new RecursiveTreeItem<supplierTable>(supplierTable_data, RecursiveTreeObject::getChildren);
+        supplierTable.setRoot(root);
+
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -153,27 +224,10 @@ public class SupplierController implements Initializable {
 
         if (selectedItem != null) {
 
-            try {
+            // get selected Value
+            supplierTable supplierTable = (SupplierController.supplierTable) selectedItem.getValue();
 
-                Stage home = new Stage();
-
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/updateSupplier.fxml"));
-                Scene scene = new Scene(root);
-
-                home.setTitle("Update Supplier");
-
-                home.setScene(scene);
-                home.setResizable(false);
-
-                scene.setFill(Color.TRANSPARENT); //Makes scene background transparent
-
-                home.initModality(Modality.APPLICATION_MODAL);
-
-                home.showAndWait();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            MainUpdateSupplier mainUpdateSupplier = new MainUpdateSupplier(supplierTable.id.get());
 
 
         } else {
