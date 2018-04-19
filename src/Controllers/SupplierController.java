@@ -53,18 +53,18 @@ public class SupplierController implements Initializable {
     private JFXButton updateBtn;
 
     @FXML
-    private TreeTableView<supplierTable> supplierTable;
+    private TreeTableView<SupplierController.supplierTable> supplierTable;
 
     @FXML
-    private TreeTableColumn<supplierTable, String> supplierTable_name;
+    private TreeTableColumn<SupplierController.supplierTable, String> supplierTable_name;
 
     @FXML
-    private TreeTableColumn<supplierTable, String> supplierTable_phone;
+    private TreeTableColumn<SupplierController.supplierTable, String> supplierTable_phone;
 
     @FXML
-    private TreeTableColumn<supplierTable, String> supplierTable_address;
+    private TreeTableColumn<SupplierController.supplierTable, String> supplierTable_address;
 
-    ObservableList<supplierTable> supplierTable_data = FXCollections.observableArrayList();
+    ObservableList<SupplierController.supplierTable> supplierTable_data = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
