@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import dialogs.dialog;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -71,6 +72,46 @@ public class SupplierController implements Initializable {
     @FXML
     private JFXButton refreshTable;
 
+    @FXML
+    private JFXButton deleteSupplier;
+
+
+    @FXML
+    void deleteSupplierAction(ActionEvent event) {
+
+
+        // check Selection
+        RecursiveTreeItem selectedItem = (RecursiveTreeItem) supplierTable.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+
+            supplierTable supplierTableSelected = (SupplierController.supplierTable) selectedItem.getValue();
+
+            BasicDBObject basicDBObject = supplierTransaction.deleteSupplier(supplierTableSelected.id.get());
+
+            if (basicDBObject != null) {
+
+                // delete from table
+                boolean t = supplierTable_data.remove(supplierTableSelected);
+                final TreeItem<supplierTable> root = new RecursiveTreeItem<supplierTable>(supplierTable_data, RecursiveTreeObject::getChildren);
+                supplierTable.setRoot(root);
+                if (!t) {
+                    dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "خطأ فى مسح المورد من الجدول");
+
+                }
+
+
+            } else {
+                dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "خطأ فى مسح المورد من الداتابيز ");
+
+            }
+
+
+        } else {
+            dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "اختر المورد للمسح");
+
+
+        }
+    }
 
     @FXML
     void refreshTableAction(ActionEvent event) {
@@ -89,10 +130,8 @@ public class SupplierController implements Initializable {
 
         });
 
-
         final TreeItem<supplierTable> root = new RecursiveTreeItem<supplierTable>(supplierTable_data, RecursiveTreeObject::getChildren);
         supplierTable.setRoot(root);
-
 
 
     }

@@ -70,4 +70,17 @@ public class supplierTransaction {
     }
 
 
+    // ------ delete -----------------------
+    public static BasicDBObject deleteSupplier(String id) {
+
+
+        BasicDBObject searchDelete = new BasicDBObject();
+        searchDelete.put("_id", new ObjectId(id));
+        collection.remove(searchDelete);
+        return searchDelete;
+
+
+    }
+
+
 }
