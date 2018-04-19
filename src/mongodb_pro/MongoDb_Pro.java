@@ -16,25 +16,23 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
  * @author Zi-D-aN
  */
 public class MongoDb_Pro extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        
-        try{
-            
+
+        try {
+
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginMain.fxml"));
-            Scene scene =  new Scene(root,700,400);
+            Scene scene = new Scene(root, 700, 400);
 //            scene.getStylesheets().add(getClass().getResource("").toExternalForm());
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.setResizable(false);
-            
-        }
-        catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -45,5 +43,5 @@ public class MongoDb_Pro extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

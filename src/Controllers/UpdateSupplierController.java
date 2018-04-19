@@ -7,6 +7,11 @@ package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -16,12 +21,27 @@ import javafx.fxml.Initializable;
  */
 public class UpdateSupplierController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+
+    @FXML
+    private JFXTextField supplierName;
+
+    @FXML
+    private JFXTextField supplierPhone;
+
+    @FXML
+    private JFXButton supplierUpdate;
+
+    @FXML
+    private JFXTextField supplierAddress;
+
+    @FXML
+    void supplierUpdateAction(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

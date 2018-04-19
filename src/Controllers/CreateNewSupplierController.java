@@ -7,7 +7,16 @@ package Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Model.supplierTransaction;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import com.mongodb.BasicDBObject;
+import dialogs.dialog;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -16,12 +25,48 @@ import javafx.fxml.Initializable;
  */
 public class CreateNewSupplierController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+
+    @FXML
+    private JFXTextField supplierName;
+
+    @FXML
+    private JFXTextField supplierPhone;
+
+    @FXML
+    private JFXButton addSupplier;
+
+    @FXML
+    private JFXTextField supplierAddress;
+
+    @FXML
+    void addSupplierAction(ActionEvent event) {
+
+        if (supplierName.getText().trim().isEmpty()
+                || supplierAddress.getText().trim().isEmpty()
+                || supplierPhone.getText().trim().isEmpty()
+                ) {
+
+            dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "ادخل جميع البيانات");
+
+
+        } else {
+
+
+            BasicDBObject object = supplierTransaction.insertSupplier(supplierName.getText(), supplierPhone.getText(), supplierAddress.getText());
+            if (object != null) {
+                dialog dd = new dialog(Alert.AlertType.CONFIRMATION, "تم", "تم حفظ العميل");
+
+
+            }
+
+        }
+
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

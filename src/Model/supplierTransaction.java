@@ -2,16 +2,22 @@ package Model;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import org.bson.types.ObjectId;
+
+import java.util.List;
 
 /**
  * Created by ahmed mar3y on 19/04/2018.
  */
 public class supplierTransaction {
 
+    static DBCollection collection = MongoConnection.getDatabae().getCollection("suppliers");
 
-    public static BasicDBObject insert(String name, String phone, String address) {
+    // insert into db
+    public static BasicDBObject insertSupplier(String name, String phone, String address) {
 
-        DBCollection collection = MongoConnection.getDatabae().getCollection("suppliers");
         BasicDBObject document = new BasicDBObject();
         document.put("name", name);
         document.put("phone", phone);
@@ -21,6 +27,44 @@ public class supplierTransaction {
         collection.insert(document);
 
         return document;
+
+
+    }
+
+    // select All
+    public static List<DBObject> SelectAllSuppliers() {
+        BasicDBObject searchQuery = new BasicDBObject();
+        DBCursor cursor = collection.find();
+
+        return cursor.toArray();
+
+
+    }
+
+    //select By Id
+    public static DBObject SelectSupplierById(String id) {
+        BasicDBObject searchQuery1 = new BasicDBObject();
+        searchQuery1.put("_id", new ObjectId(id));
+        DBObject one = collection.findOne(searchQuery1);
+        return one;
+    }
+
+    // update
+    public static BasicDBObject updateSupplier(String id, BasicDBObject objectUpdated) {
+
+
+        BasicDBObject query = new BasicDBObject();
+        query.put("_id", new ObjectId(id));
+
+//        BasicDBObject newDocument = new BasicDBObject();
+//        newDocument.put("name", "John");
+
+        BasicDBObject updateObject = new BasicDBObject();
+        updateObject.put("$set", objectUpdated);
+
+        collection.update(query, updateObject);
+
+        return updateObject;
 
 
     }
