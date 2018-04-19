@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MongoDb_Pro">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/MongoDb_Pro.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
