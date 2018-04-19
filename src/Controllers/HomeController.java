@@ -6,11 +6,13 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXButton;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,23 +36,23 @@ public class HomeController implements Initializable {
      */
     @FXML
     Pane holderPane;
-    
+
     AnchorPane homepage;
 
-     @FXML
+    @FXML
     private Text welcome;
-     
-     @FXML
-     private JFXButton SupplierBtn;
-     
-     @FXML
-     private JFXButton employeeBtn;
-     @FXML
-     private JFXButton productBtn;
-     
-       @FXML
-     private JFXButton usersBtn;
-    
+
+    @FXML
+    private JFXButton SupplierBtn;
+
+    @FXML
+    private JFXButton employeeBtn;
+    @FXML
+    private JFXButton productBtn;
+
+    @FXML
+    private JFXButton usersBtn;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -58,97 +60,94 @@ public class HomeController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-    }    
 
-    private void setNode(Node node){
+    }
+
+    private void setNode(Node node) {
         holderPane.getChildren().clear();
         holderPane.getChildren().add((Node) node);
-        
+
         FadeTransition ft = new FadeTransition(Duration.millis(1500));
-        
+
         ft.setNode(node);
         ft.setFromValue(0.1);
         ft.setToValue(1);
         ft.setCycleCount(1);
-        
+
         ft.setAutoReverse(false);
         ft.play();
     }
+
     private void createPage() throws IOException {
-         try {
+        try {
             homepage = FXMLLoader.load(getClass().getResource("/fxml/Employee.fxml"));
             setNode(homepage);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        
-        
+
     }
-    
+
     @FXML
- private void SupplierPage(ActionEvent event) throws IOException {
-         try {
+    private void SupplierPage(ActionEvent event) throws IOException {
+        try {
             homepage = FXMLLoader.load(getClass().getResource("/fxml/supplier.fxml"));
             setNode(homepage);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        
-        
+
     }
 
-   @FXML
-  private void productPage(ActionEvent event) throws IOException {
-         try {
+    @FXML
+    private void productPage(ActionEvent event) throws IOException {
+        try {
             homepage = FXMLLoader.load(getClass().getResource("/fxml/products.fxml"));
             setNode(homepage);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        
-        
+
     }
+
     @FXML
-   private void usersPage(ActionEvent event) throws IOException {
-         try {
+    private void usersPage(ActionEvent event) throws IOException {
+        try {
             homepage = FXMLLoader.load(getClass().getResource("/fxml/Users.fxml"));
             setNode(homepage);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        
-        
+
     }
-     @FXML
-         private void employPage(ActionEvent event) throws IOException {
-         try {
+
+    @FXML
+    private void employPage(ActionEvent event) throws IOException {
+        try {
             homepage = FXMLLoader.load(getClass().getResource("/fxml/Employee.fxml"));
             setNode(homepage);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        
-        
+
     }
-    
+
     @FXML
     private void profilePage(ActionEvent event) throws IOException {
-         try {
+        try {
             homepage = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
             setNode(homepage);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        
-        
+
     }
-    
-    
+
+
 }

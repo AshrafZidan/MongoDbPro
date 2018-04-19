@@ -6,14 +6,18 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXButton;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -26,69 +30,72 @@ public class SupplierController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+
     @FXML
     private JFXButton addNewBtn;
-      @FXML
+    @FXML
     private JFXButton updateBtn;
-    
-    
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
     @FXML
-    private  void LoadAddNewPage(ActionEvent e){
-        
-        try{
-            
+    private void LoadAddNewPage(ActionEvent e) {
+
+        try {
+            Stage home = new Stage();
+
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/CreateNewSupplier.fxml"));
-            Scene scene =  new Scene(root);
-            
-            Stage home = new Stage();
-               home.setTitle("Create New Supplier");
-       
+            Scene scene = new Scene(root);
+
+            home.setTitle("Create New Supplier");
+
             home.setScene(scene);
-            home.show();
             home.setResizable(false);
-            
-        }
-        catch(Exception ex){
+
+            scene.setFill(Color.TRANSPARENT); //Makes scene background transparent
+
+            home.initModality(Modality.APPLICATION_MODAL);
+
+            home.showAndWait();
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-    
-    
-        
+
+
     }
-    
-    
+
+
     @FXML
-    private  void updatePage(ActionEvent e){
-            
-        try{
-            
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/updateSupplier.fxml"));
-            Scene scene =  new Scene(root);
-            
+    private void updatePage(ActionEvent e) {
+
+        try {
             Stage home = new Stage();
-               home.setTitle("Create New Supplier");
-       
+
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/updateSupplier.fxml"));
+            Scene scene = new Scene(root);
+
+            home.setTitle("Create New Supplier");
+
             home.setScene(scene);
-            home.show();
             home.setResizable(false);
-            
-        }
-        catch(Exception ex){
+
+            scene.setFill(Color.TRANSPARENT); //Makes scene background transparent
+
+            home.initModality(Modality.APPLICATION_MODAL);
+
+            home.showAndWait();
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-    
-    
-    
-    
-        
+
+
     }
-    
-    
-    
+
+
 }
