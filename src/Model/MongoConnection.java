@@ -11,7 +11,7 @@ public class MongoConnection {
 
     private static DB database;
 
-    private static MongoClient createMongoConnection() {
+    public static MongoClient createMongoConnection() {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
 
         return mongoClient;

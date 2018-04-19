@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Model.MongoConnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -56,6 +57,9 @@ public class LoginMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
+        MongoConnection.createMongoConnection();
+
 
     }
     
