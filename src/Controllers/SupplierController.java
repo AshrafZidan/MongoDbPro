@@ -68,6 +68,36 @@ public class SupplierController implements Initializable {
 
     ObservableList<supplierTable> supplierTable_data = FXCollections.observableArrayList();
 
+    @FXML
+    private JFXButton refreshTable;
+
+
+    @FXML
+    void refreshTableAction(ActionEvent event) {
+
+
+        //clear table data
+        supplierTable_data.clear();
+
+        // Select All Suppliers
+
+        List<DBObject> dbObjects = supplierTransaction.SelectAllSuppliers();
+        dbObjects.stream().forEach(ee -> {
+
+            supplierTable_data.add(new supplierTable(ee.get("_id").toString(), ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString()));
+
+
+        });
+
+
+        final TreeItem<supplierTable> root = new RecursiveTreeItem<supplierTable>(supplierTable_data, RecursiveTreeObject::getChildren);
+        supplierTable.setRoot(root);
+
+
+
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
