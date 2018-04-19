@@ -31,10 +31,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import loadFxml.MainUpdateSupplier;
 
 /**
  * FXML Controller class
@@ -153,27 +155,10 @@ public class SupplierController implements Initializable {
 
         if (selectedItem != null) {
 
-            try {
+            // get selected Value
+            supplierTable supplierTable = (SupplierController.supplierTable) selectedItem.getValue();
 
-                Stage home = new Stage();
-
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/updateSupplier.fxml"));
-                Scene scene = new Scene(root);
-
-                home.setTitle("Update Supplier");
-
-                home.setScene(scene);
-                home.setResizable(false);
-
-                scene.setFill(Color.TRANSPARENT); //Makes scene background transparent
-
-                home.initModality(Modality.APPLICATION_MODAL);
-
-                home.showAndWait();
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            MainUpdateSupplier mainUpdateSupplier = new MainUpdateSupplier(supplierTable.id.get());
 
 
         } else {

@@ -20,7 +20,7 @@ public class Main {
 //        newDocument.put("available", false);
 //        System.out.println(supplierTransaction.updateSupplier("5ad889e2fe4aa930e4e376f3", newDocument));
 
-        System.out.println(supplierTransaction.SelectAllSuppliers());
+//        System.out.println(supplierTransaction.SelectAllSuppliers());
 
     }
 
