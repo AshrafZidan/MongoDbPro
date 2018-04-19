@@ -37,6 +37,7 @@ public class UpdateSupplierController implements Initializable {
     @FXML
     void supplierUpdateAction(ActionEvent event) {
 
+
     }
 
     @Override
