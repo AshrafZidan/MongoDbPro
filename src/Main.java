@@ -1,3 +1,5 @@
+import Model.employeeTransaction;
+import Model.storeTransaction;
 import Model.supplierTransaction;
 import com.mongodb.BasicDBObject;
 
@@ -22,7 +24,8 @@ public class Main {
 
 //        System.out.println(supplierTransaction.insertSupplier("Ashraf","01003196789","Tanta"));
 //        System.out.println(supplierTransaction.SelectAllSuppliers());
-///        System.out.println(supplierTransaction.SelectAllSuppliers());
+
+//        System.out.println(employeeTransaction.SelectEmployeeById("5ad9ba9cc466192c246b9171").toString());
 
 
     }

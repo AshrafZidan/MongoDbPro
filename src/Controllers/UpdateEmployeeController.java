@@ -7,14 +7,20 @@ package Controllers;
 
 import java.awt.event.ActionEvent;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import Model.employeeTransaction;
+import Model.storeTransaction;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import dialogs.dialog;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -41,8 +47,12 @@ public class UpdateEmployeeController implements Initializable {
 
     @FXML
     private JFXButton updateBtn;
+ @FXML
+    private JFXComboBox storeCombox;
 
     public static String employeeId;
+
+    ArrayList<String> _idlist;
 
 
     @FXML
@@ -53,6 +63,7 @@ public class UpdateEmployeeController implements Initializable {
                 || employeeAddress.getText().trim().isEmpty()
                 || employeephone.getText().trim().isEmpty()
                 || employeeEmail.getText().trim().isEmpty()
+                || storeCombox.getValue().toString().isEmpty()
                 ) {
 
             dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "ادخل جميع البيانات");
@@ -61,6 +72,7 @@ public class UpdateEmployeeController implements Initializable {
         } else {
             BasicDBObject basicDBObject = new BasicDBObject();
 
+            basicDBObject.put("store_id",getObjId());
             basicDBObject.put("address", employeeAddress.getText());
 
             basicDBObject.put("name", employeeName.getText());
@@ -81,6 +93,24 @@ public class UpdateEmployeeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        List<DBObject> AllStores =   storeTransaction.selectAllStores();
+        List<String> Namelist = new ArrayList<String>();
+        _idlist = new ArrayList<String>();
+
+
+
+        //Iteatre overThem
+        AllStores.stream().forEach(dbObject ->{
+
+            Namelist.add((String) dbObject.get("name"));
+            _idlist.add((String) dbObject.get("_id").toString());
+
+        });
+
+        ObservableList<String> options =  FXCollections.observableArrayList(Namelist);
+
+        storeCombox.setItems(options);
+
 ////         get supplierBy Id
         DBObject dbObject = employeeTransaction.SelectEmployeeById(employeeId);
         // set values
@@ -89,6 +119,19 @@ public class UpdateEmployeeController implements Initializable {
         this.employeephone.setText(dbObject.get("phone").toString());
         this.employeeEmail.setText(dbObject.get("email").toString());
         this.employeeName.setText(dbObject.get("name").toString());
+
+    }
+
+    //to get selected store id
+
+    public String getObjId() {
+
+        List<String> objID =  _idlist;
+        int index = storeCombox.getSelectionModel().getSelectedIndex();
+        String Store_id =  objID.get(index).toString();
+        System.out.println(Store_id);
+
+        return Store_id;
 
     }
 

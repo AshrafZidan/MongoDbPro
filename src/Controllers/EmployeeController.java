@@ -7,6 +7,7 @@ package Controllers;
 
 import Model.employeeTransaction;
 
+import Model.storeTransaction;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -153,7 +154,7 @@ public class EmployeeController implements Initializable {
      //Iteatre overThem
      AllEmployess_DbObjectes.stream().forEach(dbObject ->{
          employeeTable_data.add(new EmployeeTable(
-                 dbObject.get("store_id").toString(),
+                 storeTransaction.SelectEmployeeById(dbObject.get("store_id").toString()).get("name").toString(),
                  dbObject.get("_id").toString(),
                  dbObject.get("name").toString(),
                  dbObject.get("phone").toString(),
@@ -224,7 +225,7 @@ public class EmployeeController implements Initializable {
         List<DBObject> AllEmployess_DbObjectes  = employeeTransaction.selectAllEmployees();
 
         AllEmployess_DbObjectes.stream().forEach(ee -> {
-            employeeTable_data.add( new EmployeeTable( (ee.get("store_id").toString()) , (ee.get("_id").toString()) , ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString() , ee.get("email").toString()) );
+            employeeTable_data.add( new EmployeeTable( storeTransaction.SelectEmployeeById(ee.get("store_id").toString()).get("name").toString() , (ee.get("_id").toString()) , ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString() , ee.get("email").toString()) );
 
 
         });
@@ -273,10 +274,14 @@ public class EmployeeController implements Initializable {
 
     @FXML
     public  void searchByName(ActionEvent ev){
+        String query = searchBox.getText().toString().toLowerCase();
+        DBObject dbObject = employeeTransaction.SelectEmployeeByName(query);
 
-        DBObject dbObject = employeeTransaction.SelectEmployeeByName("sadasd");
-        System.out.println("Result  " +  dbObject);
-    }
+        employeeTable_data.clear();
+
+
+}
+
     class EmployeeTable extends RecursiveTreeObject<EmployeeTable>{
 
         SimpleStringProperty id;
