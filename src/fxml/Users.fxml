@@ -23,7 +23,7 @@
             <TreeTableColumn fx:id="userTable_email" prefWidth="147.0" text="الايميل" />
             <TreeTableColumn fx:id="userTable_role" prefWidth="126.0" text="الصلاحيه " />
          </columns></JFXTreeTableView>
-      <JFXTextField focusColor="#ff4757" layoutX="279.0" layoutY="30.0" maxWidth="330.0" minWidth="297.0" prefHeight="31.0" prefWidth="330.0" promptText="Filter" unFocusColor="#5352ed" />
+      <JFXTextField focusColor="#ff4757" layoutX="279.0" layoutY="30.0" maxWidth="330.0" minWidth="297.0" prefHeight="31.0" prefWidth="330.0" promptText="Filter" style="-fx-text-fill: #fff;" unFocusColor="#5352ed" />
       <JFXButton fx:id="addNewBtn" layoutX="28.0" layoutY="30.0" onAction="#loadNewUserPage" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #5352ed;" text="إضافه مستخدم" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="14.0" />
@@ -35,7 +35,7 @@
           </image> 
           
       </ImageView>
-      <JFXButton fx:id="refreshBtn" layoutX="28.0" layoutY="81.0"  prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #5352ed;" text="تحديث البيانات" textFill="#dadada">
+      <JFXButton fx:id="refreshBtn" layoutX="28.0" layoutY="81.0" onAction="#refreshPage" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #5352ed;" text="تحديث البيانات" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>

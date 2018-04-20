@@ -19,4 +19,19 @@ public class userTransaction {
 
 
     }
+
+    public  static  BasicDBObject insertUser(String Name , String Address , String Email ,String phone , String pass , String role){
+
+
+        BasicDBObject document = new BasicDBObject();
+        document.put("name", Name);
+        document.put("phone", phone);
+        document.put("address", Address);
+        document.put("email", Email);
+        document.put("pass", pass);
+        document.put("role", role);
+
+        collection.insert(document);
+        return document;
+    }
 }

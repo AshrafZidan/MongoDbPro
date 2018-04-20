@@ -73,6 +73,7 @@ public class UsersController implements Initializable {
         // TODO
         // table column initlaize
 
+
         userTable_name.setCellValueFactory(new Callback <TreeTableColumn.CellDataFeatures<UsersController.userTable, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<UsersController.userTable, String> param) {
@@ -133,6 +134,28 @@ public class UsersController implements Initializable {
 
 
     }
+
+    @FXML
+    private void refreshPage(ActionEvent e){
+
+        //clear table data
+        userTable_data.clear();
+
+//        System.out.println("done role");
+        // Select All Suppliers
+
+        List<DBObject> dbObjects = userTransaction.SelectAllSuppliers();
+
+        dbObjects.stream().forEach(ee ->{
+            userTable_data.add(new UsersController.userTable(ee.get("_id").toString(), ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString(),ee.get("email").toString(), ee.get("role").toString()));
+            });
+
+        final TreeItem<userTable> root = new RecursiveTreeItem<userTable>(userTable_data, RecursiveTreeObject::getChildren);
+        userTable.setRoot(root);
+
+
+    }
+
     @FXML
     private void loadNewUserPage(ActionEvent e){
         try {

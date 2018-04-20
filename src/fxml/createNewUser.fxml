@@ -14,26 +14,27 @@
         <URL value="@createnewuser.css" />
     </stylesheets>
    <children>
-      <Label layoutX="43.0" layoutY="67.0" prefHeight="17.0" prefWidth="79.0" text="Name :" textFill="#dadada">
+      <Label layoutX="43.0" layoutY="40.0" prefHeight="17.0" prefWidth="79.0" text="Name :" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="101.0" layoutY="60.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
-      <JFXTextField layoutX="101.0" layoutY="104.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
-      <Label layoutX="43.0" layoutY="111.0" prefHeight="17.0" prefWidth="79.0" text="Email :" textFill="#dadada">
+      <JFXTextField fx:id="UserName" layoutX="101.0" layoutY="33.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
+      <JFXTextField fx:id="UserAddress" layoutX="111.0" layoutY="74.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
+      <JFXTextField fx:id="UsereEmail" layoutX="101.0" layoutY="116.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
+      <Label layoutX="43.0" layoutY="123.0" prefHeight="17.0" prefWidth="79.0" text="Email :" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="101.0" layoutY="148.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
-      <Label layoutX="43.0" layoutY="155.0" prefHeight="17.0" prefWidth="79.0" text="phone :" textFill="#dadada">
+      <JFXTextField fx:id="UserPhone" layoutX="101.0" layoutY="160.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
+      <Label layoutX="43.0" layoutY="167.0" prefHeight="17.0" prefWidth="79.0" text="phone :" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXPasswordField layoutX="101.0" layoutY="189.0" maxWidth="255.0" minWidth="209.0" prefHeight="31.0" prefWidth="255.0" />
-      <Label layoutX="43.0" layoutY="205.0" prefHeight="17.0" prefWidth="79.0" text="pass :" textFill="#dadada">
+      <JFXPasswordField fx:id="UserePass" layoutX="101.0" layoutY="199.0" maxWidth="255.0" minWidth="209.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
+      <Label layoutX="43.0" layoutY="215.0" prefHeight="17.0" prefWidth="79.0" text="pass :" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
@@ -51,10 +52,15 @@
             <Font size="13.0" />
          </font>
       </JFXRadioButton>
-      <JFXButton layoutX="127.0" layoutY="317.0" prefHeight="31.0" prefWidth="177.0" style="-fx-background-color: #5352ed;" text="Create" textFill="#dadada">
+      <JFXButton fx:id="addUserBtn" layoutX="127.0" layoutY="317.0" onAction="#addUser" prefHeight="31.0" prefWidth="177.0" style="-fx-background-color: #5352ed;" text="إدخال جديد" textFill="#dadada">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
+      <Label layoutX="44.0" layoutY="81.0" prefHeight="17.0" prefWidth="79.0" text="Address :" textFill="#dadada">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
