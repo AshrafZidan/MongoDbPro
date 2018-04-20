@@ -61,7 +61,7 @@ public class CreateNewEmployeeController implements Initializable {
         } else {
 
 
-            BasicDBObject object = employeeTransaction.insertEmployee(EmployeeName.getText(), EmployeePhone.getText(), EmployeeAddress.getText() , EmployeeEmail.getText());
+            BasicDBObject object = employeeTransaction.insertEmployee("store 1",EmployeeName.getText(), EmployeePhone.getText(), EmployeeAddress.getText() , EmployeeEmail.getText());
             if (object != null) {
                 dialog Done = new dialog(Alert.AlertType.CONFIRMATION, "تم", "تم حفظ العميل");
 

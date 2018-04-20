@@ -6,7 +6,9 @@
 package Controllers;
 
 import Model.employeeTransaction;
+
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import java.net.URL;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import dialogs.dialog;
 import javafx.beans.property.SimpleStringProperty;
@@ -34,6 +37,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import loadFxml.MainUpdateEmployee;
 
 import static Model.employeeTransaction.selectAllEmployees;
 
@@ -54,10 +58,23 @@ public class EmployeeController implements Initializable {
     private JFXButton updateBtn;
 
     @FXML
+    private  JFXButton refresh;
+
+    @FXML
+    private  JFXButton deletBtn;
+
+    @FXML
+    private JFXTextField searchBox;
+
+
+    @FXML
     private TreeTableView<EmployeeController.EmployeeTable> employeeTable;
 
     @FXML
     private TreeTableColumn<EmployeeController.EmployeeTable, String> employeeTable_name;
+
+    @FXML
+    private TreeTableColumn<EmployeeController.EmployeeTable, String> employeeTable_store;
 
     @FXML
     private TreeTableColumn<EmployeeController.EmployeeTable, String> employeeTable_phone;
@@ -77,6 +94,7 @@ public class EmployeeController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -119,17 +137,27 @@ public class EmployeeController implements Initializable {
 
         });
 
+        employeeTable_store.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures< EmployeeTable, String>, ObservableValue<String>>() {
+
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<EmployeeTable, String> param) {
+                return param.getValue().getValue().store_id;
+            }
+
+        });
+
 //        get All Employess from employee Model
-     List<DBObject> AllEmployess_DbObjectes  = employeeTransaction.selectAllEmployees();
+
+        List<DBObject> AllEmployess_DbObjectes  = employeeTransaction.selectAllEmployees();
 
      //Iteatre overThem
      AllEmployess_DbObjectes.stream().forEach(dbObject ->{
          employeeTable_data.add(new EmployeeTable(
+                 dbObject.get("store_id").toString(),
                  dbObject.get("_id").toString(),
                  dbObject.get("name").toString(),
                  dbObject.get("phone").toString(),
                  dbObject.get("email").toString(),
-
                  dbObject.get("address").toString()));
 
              }
@@ -167,39 +195,19 @@ public class EmployeeController implements Initializable {
     
 
     @FXML
-    private void updatePage(ActionEvent events) {
+    private void updatePage(ActionEvent ev) {
 
         // check Selection
-
-
         RecursiveTreeItem selectedItem = (RecursiveTreeItem) employeeTable.getSelectionModel().getSelectedItem();
 
         if (selectedItem != null) {
 
-            try {
-
-                Stage Update_page = new Stage();
-
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/updateEmployee.fxml"));
-                Scene scene = new Scene(root);
-
-                Update_page.setTitle("Update Supplier");
-
-                Update_page.setScene(scene);
-                Update_page.setResizable(false);
-
-                scene.setFill(Color.TRANSPARENT); //Makes scene background transparent
-
-                Update_page.initModality(Modality.APPLICATION_MODAL);
-
-                Update_page.showAndWait();
-
-            } catch (Exception exp) {
-                exp.printStackTrace();
-            }
+            EmployeeTable employeeTable = (EmployeeController.EmployeeTable) selectedItem.getValue();
+            MainUpdateEmployee updateEmployee = new MainUpdateEmployee(employeeTable.id.get());
 
 
-        } else {
+        }
+        else {
             dialog warning = new dialog(Alert.AlertType.WARNING, "خظأ", "اختر الموظف للتعديل");
 
         }
@@ -207,9 +215,72 @@ public class EmployeeController implements Initializable {
 
     }
 
+    @FXML
+    public  void refreshPage(ActionEvent ev){
+
+        employeeTable_data.clear();
+
+//        get All Employess from employee Model
+        List<DBObject> AllEmployess_DbObjectes  = employeeTransaction.selectAllEmployees();
+
+        AllEmployess_DbObjectes.stream().forEach(ee -> {
+            employeeTable_data.add( new EmployeeTable( (ee.get("store_id").toString()) , (ee.get("_id").toString()) , ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString() , ee.get("email").toString()) );
+
+
+        });
+
+        final TreeItem<EmployeeTable> root = new RecursiveTreeItem<EmployeeTable>(employeeTable_data, RecursiveTreeObject::getChildren);
+        employeeTable.setRoot(root);
+
+    }
+
+
+    @FXML
+    public  void deleteEmployee(ActionEvent ev){
+
+
+        // check Selection
+        RecursiveTreeItem selectedItem = (RecursiveTreeItem) employeeTable.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+
+              EmployeeTable employeeTableSelected = (EmployeeController.EmployeeTable) selectedItem.getValue();
+              BasicDBObject basicDBObject = employeeTransaction.deleteEmployee(employeeTableSelected.id.get());
+
+            if (basicDBObject != null) {
+                boolean t =  employeeTable_data.remove(employeeTableSelected);
+                final  TreeItem<EmployeeTable>  root = new RecursiveTreeItem <>(employeeTable_data , RecursiveTreeObject::getChildren);
+                employeeTable.setRoot(root);
+
+                if (!t) {
+                    dialog warning = new dialog(Alert.AlertType.WARNING, "خظأ", "خطأ فى مسح الموظف  من الجدول");
+
+                }
+
+
+            } else {
+                dialog warning = new dialog(Alert.AlertType.WARNING, "خظأ", "خطأ فى مسح الموظف من الداتابيز ");
+
+            }
+
+
+        } else {
+            dialog dd = new dialog(Alert.AlertType.WARNING, "خظأ", "اختر الموظف للمسح");
+
+
+        }
+
+    }
+
+    @FXML
+    public  void searchByName(ActionEvent ev){
+
+        DBObject dbObject = employeeTransaction.SelectEmployeeByName("sadasd");
+        System.out.println("Result  " +  dbObject);
+    }
     class EmployeeTable extends RecursiveTreeObject<EmployeeTable>{
 
         SimpleStringProperty id;
+        SimpleStringProperty store_id;
         SimpleStringProperty name;
         SimpleStringProperty phone;
         SimpleStringProperty address;
@@ -217,9 +288,10 @@ public class EmployeeController implements Initializable {
 
 
         // create constructor
-        public EmployeeTable(String id , String name , String phone , String address , String email){
-            this.id = new SimpleStringProperty(id);
+        public EmployeeTable(String store_id , String id , String name , String phone , String address , String email){
 
+            this.id = new SimpleStringProperty(id);
+            this.store_id = new SimpleStringProperty(store_id);
             this.address = new SimpleStringProperty(address);
             this.name = new SimpleStringProperty(name);
             this.phone = new SimpleStringProperty(phone);
@@ -286,6 +358,19 @@ public class EmployeeController implements Initializable {
 
         public void setEmail(String email) {
             this.email.set(email);
+        }
+
+
+        public String getStore() {
+            return store_id.get();
+        }
+
+        public SimpleStringProperty store_idProperty() {
+            return store_id;
+        }
+
+        public void setStore_id(String store_id) {
+            this.store_id.set(store_id);
         }
     }
 

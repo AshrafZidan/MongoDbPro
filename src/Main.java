@@ -20,12 +20,9 @@ public class Main {
 //        newDocument.put("available", false);
 //        System.out.println(supplierTransaction.updateSupplier("5ad889e2fe4aa930e4e376f3", newDocument));
 
-<<<<<<< HEAD
-        System.out.println(supplierTransaction.insertSupplier("Ashraf","01003196789","Tanta"));
-        System.out.println(supplierTransaction.SelectAllSuppliers());
-=======
+//        System.out.println(supplierTransaction.insertSupplier("Ashraf","01003196789","Tanta"));
 //        System.out.println(supplierTransaction.SelectAllSuppliers());
->>>>>>> 9adaa1a11b7b349f59a00e4cc01eae312ac68182
+///        System.out.println(supplierTransaction.SelectAllSuppliers());
 
 
     }

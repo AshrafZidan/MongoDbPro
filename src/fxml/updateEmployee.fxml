@@ -19,20 +19,20 @@
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="101.0" layoutY="60.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
-      <JFXTextField layoutX="101.0" layoutY="104.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
+      <JFXTextField fx:id="employeeName" layoutX="101.0" layoutY="60.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
+      <JFXTextField fx:id="employeeEmail" layoutX="101.0" layoutY="104.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
       <Label layoutX="43.0" layoutY="111.0" prefHeight="17.0" prefWidth="79.0" text="Email :" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="101.0" layoutY="148.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
+      <JFXTextField fx:id="employeephone" layoutX="101.0" layoutY="148.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
       <Label layoutX="43.0" layoutY="155.0" prefHeight="17.0" prefWidth="79.0" text="phone :" textFill="#dadada">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXButton layoutX="126.0" layoutY="273.0" prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: #5352ed;" text="Update" textFill="#dadada">
+      <JFXButton fx:id="updateBtn" layoutX="126.0" layoutY="273.0" onAction="#employeepdateAction" prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: #5352ed;" text="تحديث البيانات" textFill="#dadada">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -42,6 +42,6 @@
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="100.0" layoutY="192.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" />
+      <JFXTextField fx:id="employeeAddress" layoutX="100.0" layoutY="192.0" maxWidth="255.0" minWidth="211.0" prefHeight="31.0" prefWidth="255.0" style="-fx-text-fill: #fff;" />
    </children>
 </AnchorPane>

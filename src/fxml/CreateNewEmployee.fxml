@@ -32,7 +32,7 @@
             <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <JFXButton fx:id="addEmployee" layoutX="126.0" layoutY="273.0" onAction="#addEmployee" prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: #5352ed;" text="Add New" textFill="#dadada">
+      <JFXButton fx:id="addEmployee" layoutX="126.0" layoutY="273.0" onAction="#addEmployee" prefHeight="37.0" prefWidth="216.0" style="-fx-background-color: #5352ed;" text="إدخال جديد" textFill="#dadada">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
