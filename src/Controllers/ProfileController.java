@@ -39,6 +39,7 @@ public class ProfileController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
     @FXML
     private JFXButton createNewUserBtn;
 

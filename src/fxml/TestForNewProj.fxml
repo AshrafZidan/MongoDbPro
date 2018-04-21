@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #000;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="61.0" layoutY="22.0" prefHeight="17.0" prefWidth="297.0" text="Test Label for resposive" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="403.0" />
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ccc;" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton contentDisplay="TOP" prefHeight="150.0" prefWidth="116.0">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="30.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Desktop/Icons/cart-add-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="106.0" />
+            <JFXButton layoutX="10.0" layoutY="100.0" prefHeight="150.0" prefWidth="106.0" />
+            <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="106.0" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
