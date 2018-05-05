@@ -13,7 +13,7 @@ public class userTransaction {
     static DBCollection collection = MongoConnection.getDatabae().getCollection("users");
 
     // select All
-    public static List<DBObject> SelectAllSuppliers() {
+    public static List<DBObject> SelectAll() {
         BasicDBObject searchQuery = new BasicDBObject();
         DBCursor cursor = collection.find();
 

@@ -117,7 +117,7 @@ public class UsersController implements Initializable {
 
         // Select All Suppliers
 
-        List<DBObject> dbObjects = userTransaction.SelectAllSuppliers();
+        List<DBObject> dbObjects = userTransaction.SelectAll();
         dbObjects.stream().forEach(ee ->{
    userTable_data.add(new UsersController.userTable(ee.get("_id").toString(), ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString(),ee.get("email").toString(), ee.get("role").toString()));
 
@@ -144,7 +144,7 @@ public class UsersController implements Initializable {
 //        System.out.println("done role");
         // Select All Suppliers
 
-        List<DBObject> dbObjects = userTransaction.SelectAllSuppliers();
+        List<DBObject> dbObjects = userTransaction.SelectAll();
 
         dbObjects.stream().forEach(ee ->{
             userTable_data.add(new UsersController.userTable(ee.get("_id").toString(), ee.get("name").toString(), ee.get("phone").toString(), ee.get("address").toString(),ee.get("email").toString(), ee.get("role").toString()));
@@ -152,6 +152,7 @@ public class UsersController implements Initializable {
 
         final TreeItem<userTable> root = new RecursiveTreeItem<userTable>(userTable_data, RecursiveTreeObject::getChildren);
         userTable.setRoot(root);
+
 
 
     }
