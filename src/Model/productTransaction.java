@@ -9,24 +9,19 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 /**
- * Created by ahmed mar3y on 19/04/2018.
+ * Created by ahmed mar3y on 06/05/2018.
  */
-public class supplierTransaction {
+public class productTransaction {
 
-    static DBCollection collection = MongoConnection.getDatabae().getCollection("suppliers");
+    static DBCollection collection = MongoConnection.getDatabae().getCollection("products");
 
     // insert into db
-    public static BasicDBObject insertSupplier(String name, String phone, String address) {
+    public static BasicDBObject insertSupplier(BasicDBObject object) {
 
-        BasicDBObject document = new BasicDBObject();
-        document.put("name", name);
-        document.put("phone", phone);
-        document.put("address", address);
-        document.put("available", true);
 
-        collection.insert(document);
+        collection.insert(object);
 
-        return document;
+        return object;
 
 
     }

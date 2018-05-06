@@ -24,7 +24,6 @@ public class MongoDb_Pro extends Application {
     public void start(Stage primaryStage) {
 
         try {
-
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginMain.fxml"));
             Scene scene = new Scene(root, 700, 400);
 //            scene.getStylesheets().add(getClass().getResource("").toExternalForm());
